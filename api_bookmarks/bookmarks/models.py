@@ -13,7 +13,7 @@ class Bookmark(models.Model):
         MUSIC = 'music', _('music')
         VIDEO = 'video', _('video')
 
-    link = models.TextField(verbose_name='Ссылка', unique=True)
+    link = models.TextField(verbose_name='Ссылка')
     author = models.ForeignKey(
         User,
         verbose_name='Автор',
@@ -54,7 +54,7 @@ class Collection(models.Model):
         on_delete=models.CASCADE,
         related_name='collections'
     )
-    title = models.TextField(verbose_name='Название', unique=True)
+    title = models.TextField(verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
     created_at = models.DateTimeField(
         verbose_name='Дата и время создания', auto_now_add=True
