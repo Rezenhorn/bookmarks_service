@@ -24,6 +24,7 @@ class BookmarkViewSet(ListRetrieveCreateDeleteViewSet):
         url_path='collection/(?P<collection_pk>[^/.]+)'
     )
     def collection(self, request, pk, collection_pk):
+        """Добавление/удаление закладок в коллекции."""
         bookmark = get_object_or_404(Bookmark, pk=pk)
         collection = get_object_or_404(Collection, pk=collection_pk)
         serializer = CollectionSerializer(collection)

@@ -7,18 +7,18 @@ User = get_user_model()
 
 class Bookmark(models.Model):
     class LinkType(models.TextChoices):
-        WEBSITE = "website", _("website")
-        BOOK = "book", _("book")
-        ARTICLE = "article", _("article")
-        MUSIC = "music", _("music")
-        VIDEO = "video", _("video")
+        WEBSITE = 'website', _('website')
+        BOOK = 'book', _('book')
+        ARTICLE = 'article', _('article')
+        MUSIC = 'music', _('music')
+        VIDEO = 'video', _('video')
 
     link = models.TextField(verbose_name='Ссылка', unique=True)
     author = models.ForeignKey(
         User,
-        verbose_name="Автор",
+        verbose_name='Автор',
         on_delete=models.CASCADE,
-        related_name="bookmarks"
+        related_name='bookmarks'
     )
     title = models.TextField(verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
@@ -44,15 +44,15 @@ class Bookmark(models.Model):
         verbose_name_plural = 'Закладки страниц'
 
     def __str__(self):
-        return f"Закладка <{self.link}>"
+        return f'Закладка <{self.link}>'
 
 
 class Collection(models.Model):
     author = models.ForeignKey(
         User,
-        verbose_name="Автор",
+        verbose_name='Автор',
         on_delete=models.CASCADE,
-        related_name="collections"
+        related_name='collections'
     )
     title = models.TextField(verbose_name='Название', unique=True)
     description = models.TextField(verbose_name='Описание')
@@ -68,4 +68,4 @@ class Collection(models.Model):
         verbose_name_plural = 'Коллекции'
 
     def __str__(self):
-        return f"Коллекция {self.title}"
+        return f'Коллекция {self.title}'
