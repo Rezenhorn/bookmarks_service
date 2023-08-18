@@ -1,0 +1,694 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "Документация к API приложения Bookmarks",
+      "version": "1"
+    },
+    "paths": {
+      "/api/bookmarks/": {
+        "get": {
+          "operationId": "listBookmarks",
+          "summary": "Получить все свои закладки",
+          "description": "Получить все закладки пользователя, отправившего запрос.",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Bookmark"
+                    }
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "post": {
+          "operationId": "createBookmark",
+          "summary": "Добавить закладку",
+          "description": "Добавить закладку. В теле запроса необходимо передать ссылку `link`.",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bookmark"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bookmark"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bookmark"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Bookmark"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        }
+      },
+      "/api/bookmarks/{id}/": {
+        "get": {
+          "operationId": "retrieveBookmark",
+          "summary": "Получить конкретную закладку",
+          "description": "Получить конкретную закладку по `id`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id закладки",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Bookmark"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "delete": {
+          "operationId": "destroyBookmark",
+          "summary": "Удалить закладку",
+          "description": "Удалить закладку по `id`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id закладки",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        }
+      },
+      "/api/collections/": {
+        "get": {
+          "operationId": "listCollections",
+          "summary": "Получить все свои коллекции",
+          "description": "Получить все коллекции пользователя, отправившего запрос.",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Collection"
+                    }
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "post": {
+          "operationId": "createCollection",
+          "summary": "Добавить коллекцию",
+          "description": "Добавить коллекцию. В теле запроса необходимо указать название `title` и описание `description`.",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        }
+      },
+      "/api/collections/{id}/": {
+        "get": {
+          "operationId": "retrieveCollection",
+          "summary": "Получить конкретную коллекцию",
+          "description": "Получить конкретную коллекцию по `id`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id коллекции",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "put": {
+          "operationId": "updateCollection",
+          "summary": "Обновить коллекцию",
+          "description": "Обновить существующую коллекцию по `id`. Необходимо заполнить название `title` и описание `description`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id коллекции",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "patch": {
+          "operationId": "partialUpdateCollection",
+          "summary": "Частично обновить коллекцию",
+          "description": "Обновить существующую коллекцию по `id`. Необходимо заполнить название `title` или описание `description`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id коллекции",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "delete": {
+          "operationId": "destroyCollection",
+          "summary": "Удалить коллекцию",
+          "description": "Удалить существующую коллекцию по `id`. Входящие в нее закладки при этом не удаляются.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id коллекции",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        }
+      },
+      "/auth/users/": {
+        "post": {
+          "operationId": "createUser",
+          "summary": "Регистрация пользователя",
+          "description": "Регистрация пользователя. Тело запроса должно содержать `email` и `password`.",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreate"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreate"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UserCreate"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "auth"
+          ]
+        }
+      },
+      "/api/bookmarks/{id}/collection/{collection_pk}/": {
+        "post": {
+          "operationId": "createCollectionBookmark",
+          "summary": "Добавить закладку в коллекцию",
+          "description": "Добавить закладку `id` в коллекцию `collection_pk`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id закладки",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "collection_pk",
+              "in": "path",
+              "required": true,
+              "description": "id коллекции",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Bookmark"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        },
+        "delete": {
+          "operationId": "delCollectionBookmark",
+          "summary": "Удалить закладку из коллекции",
+          "description": "Удалить закладку `id` из коллекции `collection_pk`.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id закладки",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "collection_pk",
+              "in": "path",
+              "required": true,
+              "description": "id коллекции",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "api"
+          ]
+        }
+      },
+      "/auth/token/login/": {
+        "post": {
+          "operationId": "createTokenCreate",
+          "summary": "Создать и получить токен для аутентификации (Вход)",
+          "description": "Use this endpoint to obtain user authentication token.",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenCreate"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenCreate"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenCreate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenCreate"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "auth"
+          ]
+        }
+      },
+      "/auth/token/logout/": {
+        "post": {
+          "operationId": "createTokenDestroy",
+          "summary": "Удалить токен для аутентификации (Выход)",
+          "description": "Use this endpoint to logout user (remove user authentication token).",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {}
+              },
+              "multipart/form-data": {
+                "schema": {}
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              },
+              "description": ""
+            }
+          },
+          "tags": [
+            "auth"
+          ]
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "ApiKeyAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "Authorization"
+        }
+      },
+      "schemas": {
+        "Bookmark": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "author": {
+              "type": "string",
+              "readOnly": true
+            },
+            "link": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "type": "string",
+              "readOnly": true
+            },
+            "type": {
+              "enum": [
+                "website",
+                "book",
+                "article",
+                "music",
+                "video"
+              ],
+              "type": "string",
+              "readOnly": true
+            },
+            "image": {
+              "type": "string",
+              "readOnly": true
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated_at": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "collections": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "required": [
+            "link"
+          ]
+        },
+        "Collection": {
+          "type": "object",
+          "properties": {
+            "author": {
+              "type": "string",
+              "readOnly": true
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "bookmarks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "required": [
+            "title",
+            "description"
+          ]
+        },
+        "UserCreate": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "format": "email",
+              "maxLength": 254
+            },
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "password": {
+              "type": "string",
+              "writeOnly": true
+            }
+          },
+          "required": [
+            "email",
+            "password"
+          ]
+        },
+        "TokenCreate": {
+          "type": "object",
+          "properties": {
+            "password": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
+        },
+        "SendEmailReset": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "required": [
+            "email"
+          ]
+        }
+      }
+    },
+    "security": [
+      {
+        "ApiKeyAuth": []
+      }
+    ]
+  }
